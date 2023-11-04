@@ -1,0 +1,28 @@
+# Learn more about configuring your app at https://shopify.dev/docs/apps/tools/cli/configuration
+
+name = "gpt-data-assistant"
+client_id = "7518e2f42794a0fbe7e3cd348eb85f09"
+application_url = "https://saint-converted-compounds-hill.trycloudflare.com"
+embedded = true
+
+[access_scopes]
+# Learn more at https://shopify.dev/docs/apps/tools/cli/configuration#access_scopes
+scopes = "write_products"
+
+[auth]
+redirect_urls = [
+  "https://saint-converted-compounds-hill.trycloudflare.com/auth/callback",
+  "https://saint-converted-compounds-hill.trycloudflare.com/auth/shopify/callback",
+  "https://saint-converted-compounds-hill.trycloudflare.com/api/auth/callback",
+  "https://saint-converted-compounds-hill.trycloudflare.com/.shopify/graphiql/auth/callback"
+]
+
+[webhooks]
+api_version = "2023-10"
+
+[pos]
+embedded = false
+
+[build]
+automatically_update_urls_on_dev = true
+dev_store_url = "thanhzzz.myshopify.com"
