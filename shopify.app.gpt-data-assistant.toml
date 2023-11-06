@@ -2,7 +2,7 @@
 
 name = "gpt-data-assistant"
 client_id = "04cb1f25a07245bcb35c13a1c9e23c47"
-application_url = "https://bf16-27-79-189-180.ngrok-free.app"
+application_url = "https://exotic-textbook-personally-pensions.trycloudflare.com"
 embedded = true
 
 [access_scopes]
@@ -11,10 +11,10 @@ scopes = "write_products"
 
 [auth]
 redirect_urls = [
-  "https://bf16-27-79-189-180.ngrok-free.app/auth/callback",
-  "https://bf16-27-79-189-180.ngrok-free.app/auth/shopify/callback",
-  "https://bf16-27-79-189-180.ngrok-free.app/api/auth/callback",
-  "https://bf16-27-79-189-180.ngrok-free.app/.shopify/graphiql/auth/callback"
+  "https://exotic-textbook-personally-pensions.trycloudflare.com/auth/callback",
+  "https://exotic-textbook-personally-pensions.trycloudflare.com/auth/shopify/callback",
+  "https://exotic-textbook-personally-pensions.trycloudflare.com/api/auth/callback",
+  "https://exotic-textbook-personally-pensions.trycloudflare.com/.shopify/graphiql/auth/callback"
 ]
 
 [webhooks]
