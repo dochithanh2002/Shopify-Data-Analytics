@@ -1,9 +1,9 @@
-import { redirect } from "@remix-run/node";
 import { Card, Button, CalloutCard, InlineGrid, Layout, Page, Text, BlockStack } from "@shopify/polaris";
 import {
   WandMajor
 } from '@shopify/polaris-icons';
 import React from "react"; 
+import { useNavigate } from "@remix-run/react";
 
 export default function App() {
   return (
@@ -44,7 +44,7 @@ export default function App() {
         <Layout.Section>
             <InlineGrid gap="400" columns={3}>
               <Card>
-                <Button icon={WandMajor} onClick={() => redirect("/weekly")}>Weekly Summary</Button>
+                <Button icon={WandMajor} onClick={() => navigate("/weekly")}>Weekly Summary</Button>
               </Card>
               <Card>
                 <Button icon={WandMajor}>Customer Segment</Button>
