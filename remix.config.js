@@ -40,4 +40,10 @@ module.exports = {
     "use-debounce",
     /remix-utils/,
   ],
+  browserNodeBuiltinsPolyfill: {
+    modules: {
+      child_process: "true",
+      fs: "true",
+    },
+  },
 };

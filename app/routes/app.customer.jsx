@@ -7,28 +7,22 @@ import {
   Page,
   Box,
   Text,
+  Button,
 } from "@shopify/polaris";
-import { authenticate } from "../shopify.server";
 import { useLoaderData } from "@remix-run/react";
-import { json } from "@remix-run/node";
+import shopify from "../shopify.server";
+
 export const loader = async ({ request }) => {
-  const { admin, session } = await authenticate.admin(request);
-  const response = client.get({
+  const { admin, session } = await shopify.authenticate.admin(request);
+  const response = await admin.rest.resources.Customer.all({
     session: session,
-    status: "any",
   });
-  const client = new shopify.clients.Rest({ session });
-  const product = await client.get({
-    path: `products/${productId}`,
-    query: { id: 1, title: "title" },
-  });
-  //   const orders = await response.json();
-  return json({ product });
+  return response;
 };
 
 export default function App() {
-  const { product } = useLoaderData();
-  console.log("check", product);
+  const data = useLoaderData();
+  console.log("check", data);
   return (
     <Page
       backAction={{ content: "Homepage", url: "/app" }}
@@ -36,6 +30,7 @@ export default function App() {
       fullWidth
     >
       <Text>Lamo</Text>
+      <Button onClick={() => alert("Clicked!")}>Click me </Button>
     </Page>
   );
 }
