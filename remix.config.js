@@ -39,6 +39,9 @@ module.exports = {
     "internmap",
     "use-debounce",
     /remix-utils/,
+    /^@adobe\/react-spectrum/,
+    /^@react-spectrum/,
+    /^@spectrum-icons/,
   ],
   browserNodeBuiltinsPolyfill: {
     modules: {

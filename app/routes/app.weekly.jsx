@@ -76,7 +76,7 @@ export default function App() {
             and demonstrates how to use Polaris Viz components for charts.
           </p>
         </CalloutCard>
-        <InlineGrid columns={{ xs: 1, md: "1fr 1fr 1fr 1fr" }} gap="400">
+        <InlineGrid columns={{ xs: 1, md: "1fr 1fr 1fr 1fr 1fr" }} gap="400">
           <Card>
             <Text>Total Revenue</Text>
           </Card>
@@ -85,6 +85,9 @@ export default function App() {
           </Card>
           <Card>
             <Text>Net Profit</Text>
+          </Card>
+          <Card>
+            <Text>Profit Margin</Text>
           </Card>
           <Card>
             <Text>Profit Margin</Text>
