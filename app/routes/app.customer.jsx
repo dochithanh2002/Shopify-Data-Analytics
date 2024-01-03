@@ -1,27 +1,18 @@
 import React from "react";
-import {
-  BlockStack,
-  CalloutCard,
-  Card,
-  InlineGrid,
-  Page,
-  Box,
-  Text,
-  Button,
-} from "@shopify/polaris";
+import { Page, Text, Button } from "@shopify/polaris";
 import { useLoaderData } from "@remix-run/react";
-import shopify from "../shopify.server";
+import { getCustomer } from "../shopifyapi.server";
 
 export const loader = async ({ request }) => {
-  const { admin, session } = await shopify.authenticate.admin(request);
-  const response = await admin.rest.resources.Customer.all({
-    session: session,
-  });
-  return response;
+  return getCustomer(request);
 };
 
 export default function App() {
   const data = useLoaderData();
+  function handleClick() {
+    console.log("Check", data);
+  }
+
   console.log("check", data);
   return (
     <Page
@@ -30,7 +21,7 @@ export default function App() {
       fullWidth
     >
       <Text>Lamo</Text>
-      <Button onClick={() => alert("Clicked!")}>Click me </Button>
+      <Button onClick={handleClick}>Click me </Button>
     </Page>
   );
 }

@@ -8,8 +8,8 @@ import {
   Box,
   Text,
 } from "@shopify/polaris";
-import LineChartComponent from "../components/LineChartComponent";
-import BarChartComponent from "../components/BarChartComponent";
+import LineChartComponent from "../components/Charts/LineChartComponent";
+import BarChartComponent from "../components/Charts/BarChartComponent";
 
 export default function App() {
   const data = [

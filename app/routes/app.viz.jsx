@@ -1,113 +1,106 @@
-import React from "react";
-import {
-  Card,
-  SkeletonBodyText,
-  Page,
-  Layout,
-  BlockStack,
-  Text,
-  List,
-  Link,
-} from "@shopify/polaris";
-import {
-  PolarisVizProvider,
-  LineChart,
-  TooltipContent,
-} from "@shopify/polaris-viz";
+import { Card, Page, SkeletonBodyText } from "@shopify/polaris";
 import "@shopify/polaris/build/esm/styles.css";
+import React, { PureComponent } from "react";
+import {
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
+  ResponsiveContainer,
+} from "recharts";
 import { ClientOnly } from "remix-utils/client-only";
 
-function App() {
-  const data = [
-    {
-      name: "LineChart",
-      data: [
-        { value: 80, key: "Jan" },
-        { value: 50, key: "Feb" },
-        { value: 80, key: "Mar" },
-        { value: 70, key: "Apr" },
-        { value: 20, key: "May" },
-        { value: 10, key: "Jun" },
-        { value: 100, key: "Jul" },
-      ],
-    },
-  ];
+const data = [
+  {
+    name: "Page A",
+    uv: 4000,
+    pv: 2400,
+    amt: 2400,
+  },
+  {
+    name: "Page B",
+    uv: 3000,
+    pv: 1398,
+    amt: 2210,
+  },
+  {
+    name: "Page C",
+    uv: 2000,
+    pv: 9800,
+    amt: 2290,
+  },
+  {
+    name: "Page D",
+    uv: 2780,
+    pv: 3908,
+    amt: 2000,
+  },
+  {
+    name: "Page E",
+    uv: 1890,
+    pv: 4800,
+    amt: 2181,
+  },
+  {
+    name: "Page F",
+    uv: 2390,
+    pv: 3800,
+    amt: 2500,
+  },
+  {
+    name: "Page G",
+    uv: 3490,
+    pv: 4300,
+    amt: 2100,
+  },
+];
+
+export default function App() {
   return (
-    <Page>
-      <ui-title-bar title="Spark Bar Chart Visualization"></ui-title-bar>
-      <Layout>
-        <Layout.Section>
-          <Card>
-            <BlockStack gap="500">
-              <BlockStack gap="200">
-                <Text as="p" variant="bodyMd" color="subdued">
-                  Visualization
-                </Text>
-                <ClientOnly
-                  fallback={
-                    <Card>
-                      <SkeletonBodyText />
-                    </Card>
-                  }
-                >
-                  {() => {
-                    return (
-                      <PolarisVizProvider
-                        themes={{
-                          Default: {
-                            chartContainer: {
-                              minHeight: 300,
-                              sparkChartMinHeight: 300,
-                              borderRadius: "8px",
-                              padding: "55px 15px 15px 15px",
-                            },
-                          },
-                        }}
-                      >
-                        <div style={{ position: "relative" }}>
-                          <p
-                            style={{
-                              position: "absolute",
-                              top: 12,
-                              left: 12,
-                              zIndex: 1,
-                            }}
-                          >
-                            2020-2023
-                          </p>
-                          <LineChart data={data} />
-                        </div>
-                      </PolarisVizProvider>
-                    );
+    <Page title="Customer Analytics" fullWidth>
+      <Card>
+        <ClientOnly
+          fallback={
+            <Card>
+              <SkeletonBodyText />
+            </Card>
+          }
+        >
+          {() => {
+            return (
+              <ResponsiveContainer width="100%" height="100%">
+                <LineChart
+                  width={500}
+                  height={300}
+                  data={data}
+                  margin={{
+                    top: 5,
+                    right: 30,
+                    left: 20,
+                    bottom: 5,
                   }}
-                </ClientOnly>
-              </BlockStack>
-            </BlockStack>
-          </Card>
-        </Layout.Section>
-        <Layout.Section variant="oneThird">
-          <Card>
-            <BlockStack gap="200">
-              <Text as="h2" variant="headingMd">
-                Resources
-              </Text>
-              <List>
-                <List.Item>
-                  <Link
-                    url="https://shopify.dev/docs/apps/design-guidelines/navigation#app-nav"
-                    target="_blank"
-                    removeUnderline
-                  >
-                    App nav best practices
-                  </Link>
-                </List.Item>
-              </List>
-            </BlockStack>
-          </Card>
-        </Layout.Section>
-      </Layout>
+                >
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis dataKey="name" />
+                  <YAxis />
+                  <Tooltip />
+                  <Legend />
+                  <Line
+                    type="monotone"
+                    dataKey="pv"
+                    stroke="#8884d8"
+                    activeDot={{ r: 8 }}
+                  />
+                  <Line type="monotone" dataKey="uv" stroke="#82ca9d" />
+                </LineChart>
+              </ResponsiveContainer>
+            );
+          }}
+        </ClientOnly>
+      </Card>
     </Page>
   );
 }
-
-export default App;
