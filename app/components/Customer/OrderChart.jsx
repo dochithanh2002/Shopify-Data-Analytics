@@ -3,18 +3,18 @@ import { InlineGrid, BlockStack, Text, Button } from "@shopify/polaris";
 import { Card, SkeletonBodyText } from "@shopify/polaris";
 import {
   PolarisVizProvider,
-  LineChart,
-  LinePreview,
+  BarChart,
+  TrendIndicator,
 } from "@shopify/polaris-viz";
 import { ClientOnly } from "remix-utils/client-only";
 
-export default function LifeTimeValueChart() {
+export default function CustomerChart() {
   return (
     <Card roundedAbove="sm">
       <BlockStack gap="200">
         <InlineGrid columns="1fr auto">
           <Text as="h5" variant="headingLg">
-            Customer Lifetime Value
+            Customer
           </Text>
           <Button
             variant="plain"
@@ -24,24 +24,54 @@ export default function LifeTimeValueChart() {
             View Report
           </Button>
         </InlineGrid>
-        <Chart />
+        <Chart height="350px" />
       </BlockStack>
     </Card>
   );
 }
 
-const Chart = () => {
-  const data = [
+const Chart = ({ height = "auto" }) => {
+  const SHARK_SPECIES_GROWTH = [
     {
-      name: "LineChart",
+      name: "Mako",
       data: [
-        { value: 20, key: "Jan" },
-        { value: 30, key: "Feb" },
-        { value: 80, key: "Mar" },
-        { value: 60, key: "Apr" },
-        { value: 20, key: "May" },
-        { value: 10, key: "Jun" },
-        { value: 30, key: "Jul" },
+        {
+          key: "0",
+          value: 80,
+        },
+        {
+          key: "5",
+          value: 170,
+        },
+        {
+          key: "10",
+          value: 210,
+        },
+        {
+          key: "15",
+          value: 240,
+        },
+      ],
+    },
+    {
+      name: "Great White",
+      data: [
+        {
+          key: "0",
+          value: 80,
+        },
+        {
+          key: "5",
+          value: 180,
+        },
+        {
+          key: "10",
+          value: 250,
+        },
+        {
+          key: "15",
+          value: 350,
+        },
       ],
     },
   ];
@@ -81,21 +111,23 @@ const Chart = () => {
               },
             }}
           >
-            <div style={{ height: "350px" }}>
-              <LineChart
+            {/* <TrendIndicator accessibilityLabel="Increase of 10%" value="10%" /> */}
+            <div style={{ height: height, position: "relative" }}>
+              <BarChart
                 xAxisOptions={{
                   labelFormatter: (x) => {
-                    return `${x}`;
+                    return `${x} years old`;
                   },
                 }}
                 yAxisOptions={{
                   labelFormatter: (y) => {
-                    return `${y}`;
+                    return `${y} cm`;
                   },
                 }}
-                data={data}
+                data={SHARK_SPECIES_GROWTH}
+                type="stacked"
                 theme="Light"
-              ></LineChart>
+              />
             </div>
           </PolarisVizProvider>
         );

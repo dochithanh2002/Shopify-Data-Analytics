@@ -1,47 +1,45 @@
 import React from "react";
-import { InlineGrid, BlockStack, Text, Button } from "@shopify/polaris";
-import { Card, SkeletonBodyText } from "@shopify/polaris";
-import {
-  PolarisVizProvider,
-  LineChart,
-  LinePreview,
-} from "@shopify/polaris-viz";
+import { InlineGrid, Text } from "@shopify/polaris";
+import { Card, SkeletonBodyText, Box } from "@shopify/polaris";
+import { PolarisVizProvider, LineChart } from "@shopify/polaris-viz";
 import { ClientOnly } from "remix-utils/client-only";
 
-export default function LifeTimeValueChart() {
+export default function SalesSummaryChart() {
   return (
-    <Card roundedAbove="sm">
-      <BlockStack gap="200">
-        <InlineGrid columns="1fr auto">
-          <Text as="h5" variant="headingLg">
-            Customer Lifetime Value
+    <Card>
+      <InlineGrid columns={{ xs: 1, md: "1fr 2fr" }} gap="400">
+        <Box>
+          <Text variant="headingLg" as="h5">
+            Sale Summary
           </Text>
-          <Button
-            variant="plain"
-            onClick={() => {}}
-            accessibilityLabel="View Report"
-          >
-            View Report
-          </Button>
-        </InlineGrid>
-        <Chart />
-      </BlockStack>
+          <Box paddingBlockStart="500">
+            <Text>
+              Creating a dashboard in a Shopify app with Remix using the Shopify
+              Polaris and Polaris Viz libraries involves setting up several
+              components to display analytics data.
+            </Text>
+          </Box>
+        </Box>
+        <Box>
+          <Chart />
+        </Box>
+      </InlineGrid>
     </Card>
   );
 }
 
-const Chart = () => {
+const Chart = ({ height = "auto" }) => {
   const data = [
     {
-      name: "LineChart",
+      name: "Sales Summary over month",
       data: [
-        { value: 20, key: "Jan" },
-        { value: 30, key: "Feb" },
+        { value: 80, key: "Jan" },
+        { value: 50, key: "Feb" },
         { value: 80, key: "Mar" },
-        { value: 60, key: "Apr" },
+        { value: 70, key: "Apr" },
         { value: 20, key: "May" },
         { value: 10, key: "Jun" },
-        { value: 30, key: "Jul" },
+        { value: 100, key: "Jul" },
       ],
     },
   ];
@@ -81,7 +79,8 @@ const Chart = () => {
               },
             }}
           >
-            <div style={{ height: "350px" }}>
+            {/* <TrendIndicator accessibilityLabel="Increase of 10%" value="10%" /> */}
+            <div style={{ height: height, position: "relative" }}>
               <LineChart
                 xAxisOptions={{
                   labelFormatter: (x) => {
@@ -94,8 +93,9 @@ const Chart = () => {
                   },
                 }}
                 data={data}
+                type="stacked"
                 theme="Light"
-              ></LineChart>
+              />
             </div>
           </PolarisVizProvider>
         );
